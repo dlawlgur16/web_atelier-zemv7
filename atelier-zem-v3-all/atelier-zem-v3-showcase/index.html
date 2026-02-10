@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atelier Zem | 아뜰리에젬 - Catalog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        :root {
+            --white: #FFFFFF;
+            --off-white: #FAFAF8;
+            --cream: #F5F3EF;
+            --kraft: #E8E2D6;
+            --brown-light: #C4B8A5;
+            --brown: #8B7355;
+            --brown-dark: #5C4D3C;
+            --charcoal: #2D2D2D;
+            --text: #1A1A1A;
+            --text-light: #666666;
+            --accent: #D4A373;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--off-white);
+            color: var(--text);
+            line-height: 1.5;
+        }
+        
+        /* Top Bar */
+        .top-bar {
+            background: var(--charcoal);
+            color: var(--white);
+            padding: 10px 40px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+        }
+        
+        .top-bar a {
+            color: var(--white);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+        
+        .top-bar a:hover {
+            opacity: 1;
+        }
+        
+        /* Header */
+        header {
+            background: var(--white);
+            border-bottom: 1px solid var(--kraft);
+        }
+        
+        .header-main {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+        }
+        
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--charcoal);
+            letter-spacing: -0.5px;
+        }
+        
+        .logo small {
+            font-size: 11px;
+            font-weight: 400;
+            color: var(--text-light);
+            display: block;
+            letter-spacing: 1px;
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .search-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 15px;
+            background: var(--cream);
+            border-radius: 4px;
+        }
+        
+        .search-box input {
+            border: none;
+            background: none;
+            font-size: 14px;
+            width: 200px;
+            font-family: inherit;
+        }
+        
+        .search-box input::placeholder {
+            color: var(--text-light);
+        }
+        
+        .btn-inquiry {
+            padding: 12px 25px;
+            background: var(--charcoal);
+            color: var(--white);
+            border: none;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-family: inherit;
+        }
+        
+        .btn-inquiry:hover {
+            background: var(--brown-dark);
+        }
+        
+        /* Mega Menu */
+        .mega-menu {
+            display: flex;
+            gap: 0;
+            padding: 0 40px;
+            border-top: 1px solid var(--kraft);
+        }
+        
+        .mega-menu > div {
+            padding: 15px 30px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s;
+        }
+        
+        .mega-menu > div:hover {
+            background: var(--cream);
+        }
+        
+        .mega-menu > div.active {
+            background: var(--cream);
+        }
+        
+        .mega-menu > div.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--brown);
+        }
+        
+        /* Catalog Hero */
+        .catalog-hero {
+            padding: 80px 40px;
+            text-align: center;
+            position: relative;
+            background: var(--cream);
+        }
+        
+        .catalog-hero::before {
+            content: 'SHOWCASE';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 150px;
+            font-weight: 700;
+            color: var(--kraft);
+            letter-spacing: -5px;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .catalog-hero h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+            margin-bottom: 15px;
+        }
+        
+        .catalog-hero p {
+            font-size: 16px;
+            color: var(--text-light);
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Main Content */
+        .main-content {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 40px;
+            padding: 40px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        /* Sidebar Filters */
+        .sidebar {
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+        }
+        
+        .filter-section {
+            margin-bottom: 30px;
+        }
+        
+        .filter-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            color: var(--charcoal);
+        }
+        
+        .filter-list {
+            list-style: none;
+        }
+        
+        .filter-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--kraft);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .filter-list li:hover {
+            color: var(--brown);
+            padding-left: 10px;
+        }
+        
+        .filter-list li.active {
+            color: var(--brown);
+            font-weight: 500;
+        }
+        
+        .filter-count {
+            font-size: 12px;
+            color: var(--text-light);
+            background: var(--kraft);
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+        
+        /* Product Grid */
+        .products-area {
+            flex: 1;
+        }
+        
+        .products-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--kraft);
+        }
+        
+        .results-count {
+            font-size: 14px;
+            color: var(--text-light);
+        }
+        
+        .sort-dropdown {
+            padding: 10px 20px;
+            border: 1px solid var(--kraft);
+            background: var(--white);
+            font-size: 14px;
+            font-family: inherit;
+            cursor: pointer;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+        
+        /* Product Card */
+        .product-card {
+            background: var(--white);
+            border: 1px solid var(--kraft);
+            overflow: hidden;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .product-card:hover {
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transform: translateY(-5px);
+        }
+        
+        .product-card:hover .card-actions {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .card-image {
+            width: 100%;
+            aspect-ratio: 1;
+            background-color: var(--off-white);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: all 0.4s ease;
+            padding: 15px;
+        }
+
+        .product-card:hover .card-image {
+            transform: scale(1.03);
+        }
+        
+        .card-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--brown);
+            color: var(--white);
+            padding: 5px 12px;
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .card-badge.premium {
+            background: var(--charcoal);
+        }
+        
+        .card-actions {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s;
+        }
+        
+        .card-actions button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+        
+        .btn-read-more {
+            background: var(--white);
+            color: var(--charcoal);
+            border: 1px solid var(--charcoal);
+        }
+        
+        .btn-read-more:hover {
+            background: var(--cream);
+        }
+        
+        .btn-buy {
+            background: var(--brown);
+            color: var(--white);
+        }
+        
+        .btn-buy:hover {
+            background: var(--brown-dark);
+        }
+        
+        .card-content {
+            padding: 20px;
+        }
+        
+        .card-category {
+            font-size: 11px;
+            color: var(--brown);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        
+        .card-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .card-title-en {
+            font-size: 12px;
+            color: var(--text-light);
+            margin-bottom: 10px;
+        }
+        
+        .card-desc {
+            font-size: 13px;
+            color: var(--text-light);
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+        
+        .card-price {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--charcoal);
+        }
+        
+        .card-price span {
+            font-size: 12px;
+            font-weight: 400;
+            color: var(--text-light);
+        }
+        
+        /* About Section */
+        .about-section {
+            background: var(--charcoal);
+            color: var(--white);
+            padding: 100px 40px;
+            margin-top: 80px;
+        }
+        
+        .about-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+        
+        .about-content h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+        
+        .about-content p {
+            font-size: 15px;
+            line-height: 1.8;
+            opacity: 0.85;
+            margin-bottom: 20px;
+        }
+        
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+        
+        .about-stat {
+            text-align: center;
+            padding: 30px;
+            background: rgba(255,255,255,0.05);
+        }
+        
+        .about-stat-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+        
+        .about-stat-label {
+            font-size: 13px;
+            opacity: 0.7;
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            padding: 80px 40px;
+            text-align: center;
+            background: var(--cream);
+        }
+        
+        .contact-section h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .contact-section p {
+            font-size: 15px;
+            color: var(--text-light);
+            margin-bottom: 30px;
+        }
+        
+        .contact-btn {
+            display: inline-block;
+            padding: 18px 50px;
+            background: var(--charcoal);
+            color: var(--white);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .contact-btn:hover {
+            background: var(--brown-dark);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--charcoal);
+            color: var(--white);
+            padding: 50px 40px 30px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-brand h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .footer-brand p {
+            font-size: 13px;
+            opacity: 0.7;
+            line-height: 1.7;
+        }
+        
+        .footer-col h4 {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-col a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 14px;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+        
+        .footer-col a:hover {
+            opacity: 1;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 30px;
+            text-align: center;
+            font-size: 12px;
+            opacity: 0.5;
+        }
+        
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 12px;
+            margin: -12px;
+            z-index: 101;
+        }
+
+        .menu-toggle span {
+            width: 24px;
+            height: 2px;
+            background: var(--charcoal);
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 1200px) {
+            .products-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .catalog-hero::before {
+                font-size: 100px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                padding: 30px;
+            }
+
+            .sidebar {
+                position: static;
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .top-bar {
+                padding: 10px 20px;
+                flex-direction: column;
+                gap: 5px;
+                text-align: center;
+            }
+
+            .header-main {
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 16px;
+                padding: 16px 20px;
+            }
+
+            .logo {
+                flex: 1;
+            }
+
+            .menu-toggle {
+                display: flex;
+                order: 1;
+            }
+
+            .header-actions {
+                flex-direction: row;
+                width: 100%;
+                order: 2;
+            }
+
+            .search-box {
+                flex: 1;
+            }
+
+            .search-box input {
+                width: 100%;
+            }
+
+            .btn-inquiry {
+                white-space: nowrap;
+                padding: 12px 16px;
+            }
+
+            .mega-menu {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                flex-direction: column;
+                background: var(--white);
+                padding: 100px 20px 40px;
+                z-index: 100;
+            }
+
+            .mega-menu.active {
+                display: flex;
+            }
+
+            .mega-menu > div {
+                padding: 18px 0;
+                font-size: 16px;
+                border-bottom: 1px solid var(--kraft);
+            }
+
+            .mega-menu > div.active::after {
+                display: none;
+            }
+
+            .catalog-hero {
+                padding: 50px 20px;
+            }
+
+            .catalog-hero h1 {
+                font-size: 32px;
+            }
+
+            .catalog-hero::before {
+                font-size: 60px;
+            }
+
+            .main-content {
+                padding: 20px;
+            }
+
+            .sidebar {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-section {
+                margin-bottom: 20px;
+            }
+
+            .products-header {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+
+            .card-content {
+                padding: 15px;
+            }
+
+            .card-title {
+                font-size: 14px;
+            }
+
+            .card-desc {
+                display: none;
+            }
+
+            .about-section {
+                padding: 60px 20px;
+            }
+
+            .about-content h2 {
+                font-size: 28px;
+            }
+
+            .about-stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
+
+            .about-stat {
+                padding: 20px;
+            }
+
+            .about-stat-number {
+                font-size: 32px;
+            }
+
+            .contact-section {
+                padding: 50px 20px;
+            }
+
+            .contact-section h2 {
+                font-size: 24px;
+            }
+
+            footer {
+                padding: 40px 20px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-main {
+                padding: 12px 16px;
+            }
+
+            .header-actions {
+                flex-direction: column;
+            }
+
+            .search-box {
+                width: 100%;
+            }
+
+            .btn-inquiry {
+                width: 100%;
+            }
+
+            .catalog-hero {
+                padding: 40px 16px;
+            }
+
+            .catalog-hero h1 {
+                font-size: 24px;
+            }
+
+            .catalog-hero::before {
+                font-size: 40px;
+            }
+
+            .main-content {
+                padding: 16px;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .card-actions {
+                opacity: 1;
+                transform: none;
+                position: static;
+                margin-top: 15px;
+            }
+
+            .card-image {
+                aspect-ratio: 4/3;
+            }
+
+            .card-desc {
+                display: block;
+            }
+
+            .about-section {
+                padding: 48px 16px;
+            }
+
+            .about-stats {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .contact-section {
+                padding: 40px 16px;
+            }
+
+            footer {
+                padding: 32px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div>프리미엄 프로모션 솔루션 | Premium Promotion Solutions</div>
+        <div>
+            <a href="mailto:hello@atelierzem.com">hello@atelierzem.com</a> · 
+            <a href="tel:+821012345678">+82 10 1234 5678</a>
+        </div>
+    </div>
+    
+    <header>
+        <div class="header-main">
+            <div class="logo">
+                ATELIER ZEM
+                <small>아뜰리에젬</small>
+            </div>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="header-actions">
+                <div class="search-box">
+                    <span>🔍</span>
+                    <input type="text" placeholder="제품 검색...">
+                </div>
+                <button class="btn-inquiry">문의하기</button>
+            </div>
+        </div>
+        <div class="mega-menu" id="megaMenu">
+            <div class="active">Home</div>
+            <div>All Products</div>
+            <div>General Line</div>
+            <div>Premium Line</div>
+            <div>Branding</div>
+            <div>Packaging</div>
+            <div>About</div>
+            <div>Portfolio</div>
+        </div>
+    </header>
+    
+    <section class="catalog-hero">
+        <h1>Catalog</h1>
+        <p>브랜드를 빛나게 하는 프리미엄 프로모션 제품을 만나보세요</p>
+    </section>
+    
+    <div class="main-content">
+        <aside class="sidebar">
+            <div class="filter-section">
+                <h3 class="filter-title">카테고리 Category</h3>
+                <ul class="filter-list">
+                    <li class="active">전체 보기 <span class="filter-count">8</span></li>
+                    <li>각티슈 Box Tissue <span class="filter-count">1</span></li>
+                    <li>종이컵 Paper Cup <span class="filter-count">1</span></li>
+                    <li>물티슈 Wet Wipes <span class="filter-count">1</span></li>
+                    <li>명함 Business Card <span class="filter-count">1</span></li>
+                    <li>핸드크림 Hand Cream <span class="filter-count">1</span></li>
+                    <li>샤워젤 Shower Gel <span class="filter-count">1</span></li>
+                    <li>디퓨저 Diffuser <span class="filter-count">1</span></li>
+                    <li>캔들 Candle <span class="filter-count">1</span></li>
+                </ul>
+            </div>
+            <div class="filter-section">
+                <h3 class="filter-title">라인 Line</h3>
+                <ul class="filter-list">
+                    <li class="active">전체 <span class="filter-count">8</span></li>
+                    <li>General Line <span class="filter-count">4</span></li>
+                    <li>Premium Line <span class="filter-count">4</span></li>
+                </ul>
+            </div>
+        </aside>
+        
+        <main class="products-area">
+            <div class="products-header">
+                <div class="results-count">총 8개 제품</div>
+                <select class="sort-dropdown">
+                    <option>최신순</option>
+                    <option>가격 낮은순</option>
+                    <option>가격 높은순</option>
+                    <option>인기순</option>
+                </select>
+            </div>
+            
+            <div class="products-grid">
+                <!-- General Line Products -->
+                <div class="product-card">
+                    <div class="card-image" style="background-image: url('../../pic/01-tissue-box.png')">
+                        <span class="card-badge">General</span>
+                        <div class="card-actions">
+                            <button class="btn-read-more">Read more</button>
+                            <button class="btn-buy">Buy now</button>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-category">General Line</div>
+                        <div class="card-title">프리미엄 각티슈</div>
+                        <div class="card-title-en">Premium Box Tissue</div>
+                        <div class="card-desc">부드러운 3겹 티슈. 브랜드 로고 인쇄.</div>
+                        <div class="card-price">₩1,200 <span>/ unit</span></div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="card-image" style="background-image: url('../../pic/02-paper-cup.png')">
+                        <span class="card-badge">General</span>
+                        <div class="card-actions">
+                            <button class="btn-read-more">Read more</button>
+                            <button class="btn-buy">Buy now</button>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-category">General Line</div>
+                        <div class="card-title">브랜딩 종이컵</div>
+                        <div class="card-title-en">Branded Paper Cup</div>
+                        <div class="card-desc">FSC 인증 친환경 종이. 풀컬러 인쇄.</div>
+                        <div class="card-price">₩150 <span>/ unit</span></div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="card-image" style="background-image: url('../../pic/03-wet-wipes.png')">
+                        <span class="card-badge">General</span>
+                        <div class="card-actions">
+                            <button class="btn-read-more">Read more</button>
+                            <button class="btn-buy">Buy now</button>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-category">General Line</div>
+                        <div class="card-title">휴대용 물티슈</div>
+                        <div class="card-title-en">Portable Wet Wipes</div>
+                        <div class="card-desc">피부 저자극. 10/20/80매 선택.</div>
+                        <div class="card-price">₩800 <span>/ unit</span></div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="card-image" style="background-image: url('../../pic/04-business-card.png')">
+                        <span class="card-badge">General</span>
+                        <div class="card-actions">
+                            <button class="btn-read-more">Read more</button>
+                            <button class="btn-buy">Buy now</button>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-category">General Line</div>
+                        <div class="card-title">프리미엄 명함</div>
+                        <div class="card-title-en">Premium Business Card</div>
+                        <div class="card-desc">코튼지/아트지. 박/형압 가공.</div>
+                        <div class="card-price">₩50 <span>/ unit</span></div>
+                    </div>
+                </div>
+
+                <!-- Premium Line Products -->
+                <div class="product-card">
+                    <div class="card-image" style="background-image: url('../../pic/05-hand-cream.png')">
+                        <span class="card-badge premium">Premium</span>
+                        <div class="card-actions">
+                            <button class="btn-read-more">Read more</button>
+                            <button class="btn-buy">Buy now</button>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-category">Premium Line</div>
+                        <div class="card-title">시그니처 핸드크림</div>
+                        <div class="card-title-en">Signature Hand Cream</div>
+                        <div class="card-desc">시어버터 함유. 맞춤 향 제작. 50ml.</div>
+                        <div class="card-price">₩8,000 <span>/ unit</span></div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="card-image" style="background-image: url('../../pic/06-shower-gel.png')">
+                        <span class="card-badge premium">Premium</span>
+                        <div class="card-actions">
+                            <button class="btn-read-more">Read more</button>
+                            <button class="btn-buy">Buy now</button>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-category">Premium Line</div>
+                        <div class="card-title">아로마 샤워젤</div>
+                        <div class="card-title-en">Aroma Shower Gel</div>
+                        <div class="card-desc">에센셜 오일 블렌딩. 300ml.</div>
+                        <div class="card-price">₩15,000 <span>/ unit</span></div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="card-image" style="background-image: url('../../pic/07-diffuser.png')">
+                        <span class="card-badge premium">Premium</span>
+                        <div class="card-actions">
+                            <button class="btn-read-more">Read more</button>
+                            <button class="btn-buy">Buy now</button>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-category">Premium Line</div>
+                        <div class="card-title">룸 디퓨저</div>
+                        <div class="card-title-en">Room Diffuser</div>
+                        <div class="card-desc">자연 리드스틱. 브랜드 각인. 200ml.</div>
+                        <div class="card-price">₩25,000 <span>/ unit</span></div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="card-image" style="background-image: url('../../pic/08-candle.png')">
+                        <span class="card-badge premium">Premium</span>
+                        <div class="card-actions">
+                            <button class="btn-read-more">Read more</button>
+                            <button class="btn-buy">Buy now</button>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-category">Premium Line</div>
+                        <div class="card-title">소이 캔들</div>
+                        <div class="card-title-en">Soy Candle</div>
+                        <div class="card-desc">100% 소이왁스. 맞춤 용기. 180g.</div>
+                        <div class="card-price">₩20,000 <span>/ unit</span></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <section class="about-section" id="about">
+        <div class="about-grid">
+            <div class="about-content">
+                <h2>아뜰리에젬 소개</h2>
+                <p>
+                    아뜰리에젬은 브랜드의 가치를 높이는 프리미엄 프로모션 솔루션을 제공합니다.
+                    2015년 설립 이후 500개 이상의 기업과 함께 성장하며, 
+                    차별화된 판촉물로 브랜드 경험을 만들어왔습니다.
+                </p>
+                <p>
+                    디자인부터 제작, 배송까지 원스톱 서비스를 제공하며,
+                    최고 품질의 제품으로 고객 만족을 실현합니다.
+                </p>
+            </div>
+            <div class="about-stats">
+                <div class="about-stat">
+                    <div class="about-stat-number">500+</div>
+                    <div class="about-stat-label">기업 클라이언트</div>
+                </div>
+                <div class="about-stat">
+                    <div class="about-stat-number">10K+</div>
+                    <div class="about-stat-label">제작 프로젝트</div>
+                </div>
+                <div class="about-stat">
+                    <div class="about-stat-number">8</div>
+                    <div class="about-stat-label">제품 라인</div>
+                </div>
+                <div class="about-stat">
+                    <div class="about-stat-number">99%</div>
+                    <div class="about-stat-label">고객 만족도</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="contact-section" id="contact">
+        <h2>프로젝트 문의</h2>
+        <p>브랜드에 맞는 맞춤형 솔루션을 제안해 드립니다</p>
+        <a href="mailto:hello@atelierzem.com" class="contact-btn">문의하기 →</a>
+    </section>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>Atelier Zem</h3>
+                <p>
+                    프리미엄 프로모션 솔루션<br>
+                    브랜드의 가치를 높이는 판촉물 제작
+                </p>
+            </div>
+            <div class="footer-col">
+                <h4>Products</h4>
+                <ul>
+                    <li><a href="#">General Line</a></li>
+                    <li><a href="#">Premium Line</a></li>
+                    <li><a href="#">Custom Order</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Portfolio</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="mailto:hello@atelierzem.com">hello@atelierzem.com</a></li>
+                    <li><a href="tel:+821012345678">+82 10 1234 5678</a></li>
+                    <li>서울시 강남구 테헤란로 123</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2024 Atelier Zem. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const megaMenu = document.getElementById('megaMenu');
+            const toggle = document.querySelector('.menu-toggle');
+            if (megaMenu && toggle) {
+                const isActive = megaMenu.classList.toggle('active');
+                toggle.classList.toggle('active', isActive);
+                document.body.style.overflow = isActive ? 'hidden' : '';
+            }
+        }
+
+        document.querySelectorAll('.mega-menu > div').forEach(item => {
+            item.addEventListener('click', () => {
+                const megaMenu = document.getElementById('megaMenu');
+                const toggle = document.querySelector('.menu-toggle');
+                if (window.innerWidth <= 768 && megaMenu && toggle) {
+                    megaMenu.classList.remove('active');
+                    toggle.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                const megaMenu = document.getElementById('megaMenu');
+                const toggle = document.querySelector('.menu-toggle');
+                if (megaMenu && toggle) {
+                    megaMenu.classList.remove('active');
+                    toggle.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atelier ZEM - Inquiry</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/common.css">
+</head>
+<body>
+    <!-- 모바일 헤더 -->
+    <header class="mobile-header">
+        <div class="mobile-logo">ATELIER ZEM</div>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <!-- 모바일 네비게이션 -->
+    <nav class="mobile-nav" id="mobileNav">
+        <ul>
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="about.html" class="nav-link">About</a></li>
+            <li>
+                <a href="goods.html" class="nav-link">Goods</a>
+                <ul class="sub-nav">
+                    <li><a href="goods.html" class="sub-link" data-category="curation">Curation</a></li>
+                    <li><a href="goods.html" class="sub-link" data-category="daily">Daily Essentials</a></li>
+                    <li><a href="goods.html" class="sub-link" data-category="writing">Writing & Desk</a></li>
+                    <li><a href="goods.html" class="sub-link" data-category="bags">Bags & Carry</a></li>
+                    <li><a href="goods.html" class="sub-link" data-category="home">Home & Kitchen</a></li>
+                    <li><a href="goods.html" class="sub-link" data-category="digital">Digital & Tech</a></li>
+                </ul>
+            </li>
+            <li><a href="works.html" class="nav-link">Works</a></li>
+            <li><a href="process.html" class="nav-link">Process</a></li>
+            <li><a href="inquiry.html" class="nav-link">Inquiry</a></li>
+        </ul>
+    </nav>
+
+    <!-- 좌측 사이드바 -->
+    <aside class="sidebar">
+        <div class="sidebar-logo"><a href="index.html">ATELIER ZEM</a></div>
+        <nav>
+            <ul class="sidebar-nav">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li>
+                    <a href="goods.html" class="nav-link">Goods</a>
+                    <ul class="sub-nav">
+                        <li><a href="goods.html" class="sub-link" data-category="curation">Curation</a></li>
+                        <li><a href="goods.html" class="sub-link" data-category="daily">Daily Essentials</a></li>
+                        <li><a href="goods.html" class="sub-link" data-category="writing">Writing & Desk</a></li>
+                        <li><a href="goods.html" class="sub-link" data-category="bags">Bags & Carry</a></li>
+                        <li><a href="goods.html" class="sub-link" data-category="home">Home & Kitchen</a></li>
+                        <li><a href="goods.html" class="sub-link" data-category="digital">Digital & Tech</a></li>
+                    </ul>
+                </li>
+                <li><a href="works.html" class="nav-link">Works</a></li>
+                <li><a href="process.html" class="nav-link">Process</a></li>
+                <li><a href="inquiry.html" class="nav-link">Inquiry</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- 메인 콘텐츠 -->
+    <main class="main-content">
+        <section id="inquiry" class="active">
+            <h2>Inquiry</h2>
+            <div class="inquiry-container">
+                <form class="inquiry-form">
+                    <div class="form-group">
+                        <label for="company">회사명</label>
+                        <input type="text" id="company" name="company" placeholder="회사명을 입력하세요">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">담당자명</label>
+                        <input type="text" id="name" name="name" placeholder="담당자명을 입력하세요">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">이메일</label>
+                        <input type="email" id="email" name="email" placeholder="이메일을 입력하세요">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">연락처</label>
+                        <input type="tel" id="phone" name="phone" placeholder="연락처를 입력하세요">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">문의 내용</label>
+                        <textarea id="message" name="message" placeholder="문의 내용을 입력하세요"></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">문의하기</button>
+                </form>
+                <div class="contact-info">
+                    <h3>Contact</h3>
+                    <p><strong>Tel.</strong> 02-1234-5678</p>
+                    <p><strong>Fax.</strong> 02-1234-5679</p>
+                    <p><strong>Email.</strong> info@atelierzem.com</p>
+                    <p><strong>Address.</strong><br>서울특별시 강남구 테헤란로 123<br>아뜰리에젬 빌딩 5층</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/common.js"></script>
+    <script>
+        document.querySelector('.inquiry-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('문의가 접수되었습니다. 빠른 시일 내에 연락드리겠습니다.');
+        });
+    </script>
+</body>
+</html>

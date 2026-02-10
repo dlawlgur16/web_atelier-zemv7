@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Atelier Zem</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="index.html" class="logo">Atelier Zem</a>
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <h1>Contact</h1>
+        <p>프로젝트 문의</p>
+    </header>
+
+    <!-- Contact Content -->
+    <section>
+        <div class="contact-content">
+            <div class="contact-info">
+                <h2>새로운 프로젝트에 대해<br>이야기 나눠보세요</h2>
+                <p>광고 영상, 인쇄물, 프로모션 아이템 등 브랜드에 필요한 모든 크리에이티브 솔루션을 제공합니다. 프로젝트 규모와 관계없이 편하게 문의해주세요.</p>
+                
+                <div class="contact-details">
+                    <div>
+                        <span>Email</span>
+                        <p>contact@atelierzem.co.kr</p>
+                    </div>
+                    <div>
+                        <span>Phone</span>
+                        <p>02-000-0000</p>
+                    </div>
+                    <div>
+                        <span>Address</span>
+                        <p>서울특별시 강남구 테헤란로 000</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form-wrap">
+                <form class="contact-form">
+                    <input type="text" placeholder="이름" required>
+                    <input type="email" placeholder="이메일" required>
+                    <input type="text" placeholder="회사명">
+                    <input type="text" placeholder="문의 유형 (광고/인쇄/프로모션/기타)">
+                    <textarea placeholder="프로젝트에 대해 간단히 설명해주세요"></textarea>
+                    <button type="submit" class="submit-btn">문의하기</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <span>© 2026 Atelier Zem. All rights reserved.</span>
+        <ul class="footer-links">
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">LinkedIn</a></li>
+        </ul>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

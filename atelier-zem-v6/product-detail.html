@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tissue. | Atelier ZEM</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #E8E4DF;
+            --bg-light: #F5F1ED;
+            --text: #1a1a1a;
+            --text-light: #666;
+            --border: #d0ccc7;
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        /* 좌측 사이드바 */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 200px;
+            height: 100vh;
+            padding: 40px 30px;
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1em;
+            font-weight: 500;
+            margin-bottom: 60px;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        .nav-menu {
+            list-style: none;
+            flex: 1;
+        }
+
+        .nav-menu li {
+            margin-bottom: 20px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text);
+            font-size: 0.95em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: opacity 0.2s;
+        }
+
+        .nav-menu a:hover {
+            opacity: 0.6;
+        }
+
+        .nav-menu a.active {
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+
+        .nav-menu .check {
+            font-size: 0.8em;
+        }
+
+        /* 메인 콘텐츠 */
+        .main {
+            margin-left: 200px;
+            min-height: 100vh;
+            padding: 60px 80px;
+        }
+
+        /* 뒤로가기 */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.9em;
+            margin-bottom: 40px;
+        }
+
+        .back-link:hover {
+            color: var(--text);
+        }
+
+        /* 상품 상세 레이아웃 */
+        .product-detail {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            max-width: 1200px;
+        }
+
+        /* 왼쪽: 이미지 */
+        .product-images {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .product-image-main {
+            width: 100%;
+            aspect-ratio: 1;
+            background: var(--bg-light);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            font-size: 0.9em;
+        }
+
+        .product-image-thumb {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: var(--bg-light);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            font-size: 0.85em;
+        }
+
+        /* 오른쪽: 정보 */
+        .product-info {
+            padding-top: 20px;
+        }
+
+        .product-category {
+            font-size: 0.85em;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .product-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3em;
+            font-weight: 500;
+            line-height: 1.2;
+            margin-bottom: 30px;
+        }
+
+        .product-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5em;
+            font-weight: 400;
+            color: var(--text-light);
+            margin-bottom: 40px;
+        }
+
+        .product-description {
+            font-size: 0.95em;
+            line-height: 1.8;
+            color: var(--text-light);
+            margin-bottom: 40px;
+            max-width: 400px;
+        }
+
+        .product-specs {
+            margin-bottom: 50px;
+        }
+
+        .spec-row {
+            display: flex;
+            border-bottom: 1px solid var(--border);
+            padding: 12px 0;
+            font-size: 0.9em;
+        }
+
+        .spec-label {
+            width: 100px;
+            color: var(--text-light);
+        }
+
+        .spec-value {
+            flex: 1;
+        }
+
+        .btn-buy {
+            display: inline-block;
+            padding: 16px 50px;
+            background: var(--text);
+            color: white;
+            text-decoration: none;
+            font-size: 0.9em;
+            letter-spacing: 1px;
+            transition: opacity 0.2s;
+        }
+
+        .btn-buy:hover {
+            opacity: 0.8;
+        }
+
+        /* 반응형 */
+        @media (max-width: 1024px) {
+            .sidebar {
+                display: none;
+            }
+            .main {
+                margin-left: 0;
+                padding: 40px;
+            }
+            .product-detail {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 사이드바 -->
+    <aside class="sidebar">
+        <a href="index.html" class="logo">Atelier ZEM</a>
+        <ul class="nav-menu">
+            <li><a href="index.html#home"><span class="check">✓</span> Home</a></li>
+            <li><a href="index.html#about"><span class="check">✓</span> About</a></li>
+            <li><a href="index.html#goods" class="active"><span class="check">✓</span> Goods</a></li>
+            <li><a href="index.html#works"><span class="check">✓</span> Works</a></li>
+            <li><a href="index.html#process"><span class="check">✓</span> Process</a></li>
+            <li><a href="index.html#inquiry"><span class="check">✓</span> Inquiry</a></li>
+        </ul>
+    </aside>
+
+    <!-- 메인 -->
+    <main class="main">
+        <a href="index.html#goods" class="back-link">← Back to Goods</a>
+
+        <div class="product-detail">
+            <!-- 왼쪽: 이미지 -->
+            <div class="product-images">
+                <div class="product-image-main">
+                    [ 제품 이미지 1 ]
+                </div>
+                <div class="product-image-thumb">
+                    [ 제품 이미지 2 ]
+                </div>
+            </div>
+
+            <!-- 오른쪽: 정보 -->
+            <div class="product-info">
+                <div class="product-category">Premium Tissue</div>
+                <h1 class="product-title">Tissue.</h1>
+                <p class="product-subtitle">"프리미엄 각티슈"</p>
+                
+                <p class="product-description">
+                    부드러운 3겹 티슈로 제작된 프리미엄 각티슈입니다. 
+                    브랜드 로고 인쇄가 가능하며, 고급스러운 패키지 디자인으로 
+                    기업 이미지를 한층 높여드립니다. 맞춤형 디자인과 
+                    다양한 수량 옵션을 제공합니다.
+                </p>
+
+                <div class="product-specs">
+                    <div class="spec-row">
+                        <span class="spec-label">Size</span>
+                        <span class="spec-value">200 × 200 × 100 mm</span>
+                    </div>
+                    <div class="spec-row">
+                        <span class="spec-label">Material</span>
+                        <span class="spec-value">3-ply Premium Tissue</span>
+                    </div>
+                    <div class="spec-row">
+                        <span class="spec-label">MOQ</span>
+                        <span class="spec-value">500 units</span>
+                    </div>
+                    <div class="spec-row">
+                        <span class="spec-label">Print</span>
+                        <span class="spec-value">Full Color Available</span>
+                    </div>
+                </div>
+
+                <a href="index.html#inquiry" class="btn-buy">Inquiry</a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
