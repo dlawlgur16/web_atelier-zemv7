@@ -180,6 +180,42 @@
 
     // ─── 5) Hover expand + slideshow (데스크탑) + Tap expand (모바일) ───
     const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    const viewport = document.querySelector('.works-viewport');
+
+    // 아이템 위치에 따라 transform-origin + margin 동적 설정
+    // 왼쪽 가장자리 → top left (오른쪽으로만 확대)
+    // 오른쪽 가장자리 → top right (왼쪽으로만 확대)
+    // 중앙 → top center (양쪽 균등 확대)
+    function setSmartOrigin(item) {
+        const vpRect = viewport.getBoundingClientRect();
+        const itemRect = item.getBoundingClientRect();
+        const itemCenter = itemRect.left + itemRect.width / 2;
+        const vpWidth = vpRect.right - vpRect.left;
+        const relPos = (itemCenter - vpRect.left) / vpWidth;
+
+        const scale = parseFloat(getComputedStyle(worksSection).getPropertyValue('--expand-scale')) || 2;
+        const totalExtra = (scale - 1) * itemRect.width;
+
+        if (relPos < 0.25) {
+            item.style.transformOrigin = 'top left';
+            item.style.marginLeft = '0px';
+            item.style.marginRight = totalExtra + 'px';
+        } else if (relPos > 0.75) {
+            item.style.transformOrigin = 'top right';
+            item.style.marginLeft = totalExtra + 'px';
+            item.style.marginRight = '0px';
+        } else {
+            item.style.transformOrigin = 'top center';
+            item.style.marginLeft = (totalExtra / 2) + 'px';
+            item.style.marginRight = (totalExtra / 2) + 'px';
+        }
+    }
+
+    function clearOrigin(item) {
+        item.style.transformOrigin = '';
+        item.style.marginLeft = '';
+        item.style.marginRight = '';
+    }
 
     worksList.querySelectorAll('.work-item').forEach(item => {
         let interval = null;
@@ -211,10 +247,12 @@
                 // 다른 확대된 아이템 닫기
                 worksList.querySelectorAll('.work-item.expanded').forEach(el => {
                     el.classList.remove('expanded');
+                    clearOrigin(el);
                 });
                 stopSlideshow();
 
                 if (!wasExpanded) {
+                    setSmartOrigin(item);
                     item.classList.add('expanded');
                     startSlideshow();
                 }
@@ -222,12 +260,14 @@
         } else {
             // 데스크탑: hover로 확대
             item.addEventListener('mouseenter', () => {
+                setSmartOrigin(item);
                 item.classList.add('expanded');
                 startSlideshow();
             });
 
             item.addEventListener('mouseleave', () => {
                 item.classList.remove('expanded');
+                clearOrigin(item);
                 stopSlideshow();
             });
         }

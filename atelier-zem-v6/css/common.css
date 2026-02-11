@@ -794,6 +794,8 @@ section.active {
     display: flex;
     align-items: flex-start;
     padding-top: clamp(80px, 10vh, 120px);
+    padding-left: clamp(30px, 5vw, 80px);
+    padding-right: clamp(30px, 5vw, 80px);
 }
 
 .works-list {

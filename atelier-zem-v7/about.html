@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABOUT — ATELIER ZEM</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header-wrapper --dark" id="headerWrapper">
+        <div class="header-inner">
+            <nav>
+                <li><a href="goods.html">Goods</a></li>
+                <li><a href="works.html">Works</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+            </nav>
+            <a href="index.html" class="nav-index">ATELIER ZEM</a>
+            <div class="header-right">
+                <a href="inquiry.html" class="desktop-only">Inquiry</a>
+                <button class="hamburger" id="hamburger" aria-label="메뉴" role="button" tabindex="0">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Nav -->
+    <nav class="mobile-nav" id="mobileNav">
+        <ul class="mobile-nav__list">
+            <li><a href="goods.html">Goods</a></li>
+            <li><a href="works.html">Works</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="process.html">Process</a></li>
+            <li><a href="inquiry.html">Inquiry</a></li>
+        </ul>
+        <div class="mobile-nav__sub">
+            <a href="mailto:info@atelierzem.com">Contact</a>
+            <a href="#">Instagram</a>
+        </div>
+    </nav>
+
+    <!-- Hero (GESTE about: dark bg with accent text) -->
+    <section class="about-hero-video">
+        <img src="../pic/08-candle.png" alt="Atelier ZEM" style="object-fit:cover; filter:blur(2px) brightness(0.3);">
+        <p class="about-hero-video__text">
+            It started with a need of<br>
+            quality, care, and identity.
+        </p>
+    </section>
+
+    <!-- Floating action -->
+    <a href="inquiry.html" class="floating-action">Get in touch</a>
+
+    <!-- Intro (GESTE about-intro structure) -->
+    <section class="about-intro">
+        <div class="about-intro__main">
+            <div class="t-2 reveal">
+                <p>아뜰리에젬은 고품질 호텔 어메니티 및 프리미엄 생활용품을 전문으로 제작하는 기업입니다. 10년 이상의 경험을 바탕으로 호텔, 리조트, 프리미엄 주거 공간에 최상의 제품을 공급하고 있습니다.</p>
+            </div>
+
+            <!-- Full-bleed image (GESTE about-intro__main-image) -->
+            <div class="about-intro__image">
+                <img src="../pic_nobg/05-hand-cream.png" alt="Atelier ZEM Products">
+            </div>
+        </div>
+
+        <div class="about-intro__content">
+            <div class="t-3 reveal">
+                <p>고객의 브랜드 가치를 높이는 맞춤형 솔루션을 제공합니다. 최상의 원자재와 엄격한 품질 관리를 바탕으로, 각 브랜드의 아이덴티티에 맞는 제품을 디자인하고 생산합니다. 친환경 소재와 지속 가능한 생산 방식을 추구하며, 정확한 납기와 일관된 품질, 그리고 장기적인 파트너십을 지향합니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Grid -->
+    <div class="values-grid">
+        <div class="values-grid__item reveal">
+            <div class="values-grid__num">01</div>
+            <h3 class="values-grid__title">Quality First</h3>
+            <p class="values-grid__desc">최상의 원자재와 엄격한 품질 관리로 프리미엄 제품을 제공합니다.</p>
+        </div>
+        <div class="values-grid__item reveal">
+            <div class="values-grid__num">02</div>
+            <h3 class="values-grid__title">Customization</h3>
+            <p class="values-grid__desc">고객의 브랜드 아이덴티티에 맞는 맞춤형 디자인을 제작합니다.</p>
+        </div>
+        <div class="values-grid__item reveal">
+            <div class="values-grid__num">03</div>
+            <h3 class="values-grid__title">Sustainability</h3>
+            <p class="values-grid__desc">친환경 소재와 지속 가능한 생산 방식을 추구합니다.</p>
+        </div>
+        <div class="values-grid__item reveal">
+            <div class="values-grid__num">04</div>
+            <h3 class="values-grid__title">Reliability</h3>
+            <p class="values-grid__desc">정확한 납기와 일관된 품질을 보장합니다.</p>
+        </div>
+        <div class="values-grid__item reveal">
+            <div class="values-grid__num">05</div>
+            <h3 class="values-grid__title">Partnership</h3>
+            <p class="values-grid__desc">장기적인 파트너십을 지향합니다.</p>
+        </div>
+    </div>
+
+    <!-- Newsletter -->
+    <section class="newsletter-form">
+        <div class="newsletter-form__title"><p class="t-3">Stay up to date with our newsletter</p></div>
+        <form><div><input type="email" placeholder="Enter your email" required></div><button type="submit">Subscribe</button></form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div><div class="footer-logo-text">ATELIER ZEM</div></div>
+            <div>
+                <nav class="footer-grid-item"><li><a href="goods.html">goods</a></li><li><a href="works.html">works</a></li><li><a href="about.html">about</a></li><li><a href="process.html">process</a></li></nav>
+                <nav class="footer-grid-item"><li><a href="inquiry.html">inquiry</a></li><li><a href="mailto:info@atelierzem.com">contact</a></li></nav>
+            </div>
+        </div>
+        <div class="footer-meta"><div><p>ATELIER ZEM<br>서울특별시 강남구 테헤란로 123</p></div><div><p><a href="mailto:info@atelierzem.com">info@atelierzem.com</a></p></div></div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
