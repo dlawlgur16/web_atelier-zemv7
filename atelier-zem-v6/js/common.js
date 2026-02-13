@@ -1,11 +1,17 @@
 // 현재 활성 섹션
 let currentSection = 'home';
 let isSwitching = false;
+let isPopState = false; // popstate 중복 pushState 방지
 
 // 섹션 전환
 function switchSection(targetId) {
     if (targetId === currentSection || isSwitching) return;
     isSwitching = true;
+
+    // 히스토리 기록 (popstate에 의한 전환이 아닐 때만)
+    if (!isPopState) {
+        history.pushState({ section: targetId }, '', '#' + targetId);
+    }
 
     const current = document.getElementById(currentSection);
     const target = document.getElementById(targetId);
@@ -260,6 +266,11 @@ document.querySelectorAll('.sub-link').forEach(link => {
 
         updateSubLinkActive(cat);
 
+        // 히스토리 기록
+        if (!isPopState) {
+            history.pushState({ section: 'goods', category: cat }, '', '#goods/' + cat);
+        }
+
         if (currentSection === 'goods') {
             // 제품 상세 뷰가 열려있으면 페이드아웃 후 직접 전환 (중간 단계 없이)
             var pdv = document.getElementById('productDetailView');
@@ -366,3 +377,61 @@ document.querySelectorAll('.sub-link').forEach(link => {
     // 시작
     startAuto();
 })();
+
+// ============================================
+// 브라우저 히스토리 (뒤로가기/앞으로가기)
+// ============================================
+
+// 초기 상태 기록
+history.replaceState({ section: 'home' }, '', '#home');
+
+window.addEventListener('popstate', function(e) {
+    var state = e.state;
+    if (!state) return;
+
+    isPopState = true;
+
+    var targetSection = state.section || 'home';
+
+    // 1) 제품 상세가 열려있으면 닫기
+    var pdv = document.getElementById('productDetailView');
+    if (pdv && pdv.classList.contains('show')) {
+        // 뒤로가기가 카테고리 레벨이면 상세만 닫기
+        if (state.category && !state.product && targetSection === 'goods') {
+            if (window.goodsCloseProductDetail) window.goodsCloseProductDetail();
+            isPopState = false;
+            return;
+        }
+        // 뒤로가기가 goods 그리드 레벨이면 상세+카테고리 닫기
+        if (targetSection === 'goods' && !state.category) {
+            if (window.goodsCloseProductDetail) window.goodsCloseProductDetail();
+            setTimeout(function() {
+                if (window.goodsCloseDetail) window.goodsCloseDetail();
+            }, 450);
+            isPopState = false;
+            return;
+        }
+    }
+
+    // 2) 카테고리 디테일이 열려있고 goods 그리드로 돌아가는 경우
+    var activeDetail = document.querySelector('.goods-detail.show');
+    if (activeDetail && targetSection === 'goods' && !state.category) {
+        if (window.goodsCloseDetail) window.goodsCloseDetail();
+        if (typeof updateSubLinkActive === 'function') updateSubLinkActive(null);
+        isPopState = false;
+        return;
+    }
+
+    // 3) 섹션 전환
+    if (targetSection !== currentSection) {
+        switchSection(targetSection);
+
+        // home으로 돌아가면 사이드바 닫기
+        if (targetSection === 'home') {
+            toggleSidebar(false);
+        }
+        updateTopBarColor(targetSection);
+    }
+
+    isPopState = false;
+});

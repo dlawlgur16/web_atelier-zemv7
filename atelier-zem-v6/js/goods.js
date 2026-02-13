@@ -34,6 +34,11 @@
         const detail = document.querySelector('.goods-detail[data-detail="' + cat + '"]');
         if (!detail) return;
 
+        // 히스토리 기록
+        if (!isPopState) {
+            history.pushState({ section: 'goods', category: cat }, '', '#goods/' + cat);
+        }
+
         // 그리드 페이드아웃
         goodsGrid.classList.add('fading');
 
@@ -148,6 +153,11 @@
             e.preventDefault();
             if (typeof switchSection === 'function') switchSection('inquiry');
         };
+
+        // 히스토리 기록
+        if (!isPopState) {
+            history.pushState({ section: 'goods', category: category, product: prodName }, '', '#goods/' + category + '/' + encodeURIComponent(prodName));
+        }
 
         // 보여주기 + 부모 스크롤 잠금
         goodsSection.scrollTop = 0;
