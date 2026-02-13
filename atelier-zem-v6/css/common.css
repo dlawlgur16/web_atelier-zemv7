@@ -51,7 +51,82 @@ section.section-exit {
     }
 }
 
-/* 좌측 사이드바 */
+/* ── 상단 고정 바 (로고 + 햄버거) ── */
+.top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1100;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 28px 32px;
+}
+
+.top-logo {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    color: #333;
+    transition: color 0.5s ease;
+}
+
+.top-logo a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* 홈 섹션에서 로고 + 햄버거 흰색 */
+.top-bar.on-hero .top-logo {
+    color: #fff;
+}
+
+.top-bar.on-hero .sidebar-toggle span {
+    background: #fff;
+}
+
+/* 햄버거 토글 버튼 */
+.sidebar-toggle {
+    width: 26px;
+    height: 18px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0;
+    overflow: visible;
+}
+
+.sidebar-toggle span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: #555;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: left center;
+}
+
+/* 열렸을 때 X 아이콘 */
+.sidebar-toggle.active span:nth-child(1) {
+    transform: rotate(45deg);
+    width: 24px;
+}
+
+.sidebar-toggle.active span:nth-child(2) {
+    opacity: 0;
+    width: 0;
+}
+
+.sidebar-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg);
+    width: 24px;
+}
+
+/* ── 좌측 사이드바 (메뉴 전용) ── */
 .sidebar {
     position: fixed;
     left: 0;
@@ -59,26 +134,18 @@ section.section-exit {
     width: 200px;
     height: 100vh;
     background-color: #E8E4DF;
-    padding: 60px 0;
+    padding: 130px 0 60px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    z-index: 1000;
-    border-right: 1px solid rgba(0, 0, 0, 0.05);
+    z-index: 1050;
+    border-right: 1px solid rgba(0, 0, 0, 0.04);
+    transform: translateX(-200px);
+    transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.sidebar-logo {
-    font-size: 18px;
-    font-weight: 600;
-    letter-spacing: 3px;
-    margin-bottom: 60px;
-    color: #333;
-    text-align: center;
-}
-
-.sidebar-logo a {
-    text-decoration: none;
-    color: inherit;
+.sidebar.open {
+    transform: translateX(0);
 }
 
 .sidebar nav {
@@ -257,9 +324,14 @@ section.section-exit {
 
 /* 메인 콘텐츠 영역 */
 .main-content {
-    margin-left: 200px;
+    margin-left: 0;
     height: 100vh;
     overflow: hidden;
+    transition: margin-left 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.main-content.sidebar-open {
+    margin-left: 200px;
 }
 
 /* 섹션 공통 */
@@ -291,7 +363,38 @@ section.active {
     align-items: center;
     position: relative;
     padding: 0;
-    background: #E8E4DF;
+    background: #2c2c2c;
+    overflow: hidden;
+}
+
+/* 히어로 슬라이드쇼 */
+.hero-slideshow {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.hero-slide {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center center;
+    opacity: 0;
+    transition: opacity 1.8s ease-in-out;
+    will-change: opacity;
+}
+
+.hero-slide.active {
+    opacity: 1;
+}
+
+/* 반투명 오버레이 — 텍스트 가독성 확보 */
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.18);
+    pointer-events: none;
 }
 
 .home-content {
@@ -300,7 +403,7 @@ section.active {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 18px;
 }
 
 #home h1 {
@@ -308,61 +411,76 @@ section.active {
     font-size: clamp(42px, 6vw, 80px);
     font-weight: 300;
     letter-spacing: 16px;
-    color: #333;
+    color: #fff;
     line-height: 1.1;
+    text-shadow: 0 2px 30px rgba(0, 0, 0, 0.25);
 }
 
 #home .subtitle {
     font-size: 11px;
     font-weight: 400;
     letter-spacing: 5px;
-    color: rgba(0, 0, 0, 0.35);
+    color: rgba(255, 255, 255, 0.65);
     text-transform: uppercase;
 }
 
 #home .home-line {
     width: 1px;
-    height: 60px;
-    background: rgba(0, 0, 0, 0.15);
-    margin-top: 20px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.3);
+    margin-top: 10px;
 }
 
-.scroll-hint {
+/* CTA 버튼 */
+.hero-cta {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 12px 36px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    text-decoration: none;
+    transition: all 0.4s ease;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(4px);
+}
+
+.hero-cta:hover {
+    background: #fff;
+    color: #1a1a1a;
+    border-color: #fff;
+}
+
+/* 슬라이드 인디케이터 */
+.hero-indicators {
     position: absolute;
     bottom: 40px;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 2;
+    z-index: 3;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    color: rgba(0, 0, 0, 0.3);
-    font-size: 10px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
+    gap: 12px;
 }
 
-.scroll-hint span {
-    width: 1px;
-    height: 40px;
-    background: rgba(0, 0, 0, 0.2);
-    animation: scrollPulse 2s ease-in-out infinite;
+.hero-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.4s ease;
 }
 
-@keyframes scrollPulse {
-
-    0%,
-    100% {
-        transform: scaleY(1);
-        opacity: 0.3;
-    }
-
-    50% {
-        transform: scaleY(1.5);
-        opacity: 0.8;
-    }
+.hero-dot.active {
+    background: rgba(255, 255, 255, 0.8);
 }
+
+/* (scroll-hint 제거됨) */
 
 /* About 섹션 */
 #about {
@@ -991,12 +1109,18 @@ section.active {
 #inquiry h2 {
     font-size: 32px;
     font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.inquiry-subtitle {
+    font-size: 14px;
+    color: #888;
     margin-bottom: 40px;
 }
 
 .inquiry-container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.2fr 0.8fr;
     gap: 60px;
     max-width: 1200px;
     width: 100%;
@@ -1005,71 +1129,159 @@ section.active {
 .inquiry-form {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 18px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
 }
 
 .form-group {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
 }
 
 .form-group label {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 500;
+    color: #555;
+}
+
+.required {
+    color: #c0392b;
+    font-size: 12px;
 }
 
 .form-group input,
 .form-group textarea {
-    padding: 12px 16px;
-    border: 1px solid #ccc;
-    background: rgba(255, 255, 255, 0.5);
+    padding: 11px 14px;
+    border: 1px solid #d5d0cb;
+    background: rgba(255, 255, 255, 0.6);
     font-family: inherit;
     font-size: 14px;
     outline: none;
-    transition: border-color 0.3s;
+    transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
     border-color: #333;
+    box-shadow: 0 0 0 3px rgba(51, 51, 51, 0.06);
+}
+
+.form-group input:invalid:not(:placeholder-shown),
+.form-group textarea:invalid:not(:placeholder-shown) {
+    border-color: #c0392b;
 }
 
 .form-group textarea {
-    min-height: 150px;
+    min-height: 120px;
     resize: vertical;
 }
 
+.form-actions {
+    margin-top: 4px;
+}
+
 .submit-btn {
-    padding: 14px 40px;
+    padding: 13px 44px;
     background: #333;
     color: #fff;
     border: none;
     font-size: 14px;
     font-weight: 500;
     cursor: pointer;
-    transition: background 0.3s;
-    align-self: flex-start;
+    transition: background 0.3s, opacity 0.3s;
+    letter-spacing: 0.5px;
 }
 
 .submit-btn:hover {
     background: #000;
 }
 
+.submit-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.form-message {
+    padding: 12px 16px;
+    font-size: 13px;
+    margin-top: 4px;
+    line-height: 1.5;
+}
+
+.form-message.success {
+    background: rgba(39, 174, 96, 0.08);
+    color: #1e8449;
+    border: 1px solid rgba(39, 174, 96, 0.2);
+}
+
+.form-message.error {
+    background: rgba(192, 57, 43, 0.08);
+    color: #c0392b;
+    border: 1px solid rgba(192, 57, 43, 0.2);
+}
+
+.contact-info {
+    padding-top: 8px;
+}
+
 .contact-info h3 {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
-    margin-bottom: 30px;
+    margin-bottom: 24px;
+    letter-spacing: 0.5px;
 }
 
 .contact-info p {
-    font-size: 14px;
-    margin-bottom: 15px;
-    color: #555;
+    font-size: 13px;
+    margin-bottom: 12px;
+    color: #666;
+    line-height: 1.6;
 }
 
 .contact-info strong {
     color: #333;
+    display: inline-block;
+    min-width: 60px;
+}
+
+.contact-cta {
+    margin-top: 36px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.cta-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #999;
+    margin-bottom: 8px;
+}
+
+.cta-phone {
+    display: block;
+    font-size: 22px;
+    font-weight: 600;
+    color: #333;
+    text-decoration: none;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+    transition: color 0.3s;
+}
+
+.cta-phone:hover {
+    color: #000;
+}
+
+.cta-hours {
+    font-size: 12px;
+    color: #999;
 }
 
 /* 모바일 햄버거 메뉴 */
@@ -1198,8 +1410,22 @@ section.active {
         height: calc(100vh - 60px);
     }
 
+    .top-bar {
+        display: none;  /* 모바일은 기존 모바일헤더 사용 */
+    }
+
     #home h1 {
         font-size: 28px;
+        letter-spacing: 8px;
+    }
+
+    .hero-cta {
+        padding: 10px 28px;
+        font-size: 10px;
+    }
+
+    .hero-indicators {
+        bottom: 30px;
     }
 
     #goods {
@@ -1243,6 +1469,15 @@ section.active {
     .inquiry-container {
         grid-template-columns: 1fr;
         gap: 40px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .contact-cta {
+        text-align: center;
     }
 
     /* Works — 모바일: 사이드바 없으므로 padding 줄임 */

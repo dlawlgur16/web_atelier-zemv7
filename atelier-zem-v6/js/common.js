@@ -145,7 +145,48 @@ function animateIndicatorWithClose(sub) {
 // 초기 active 설정
 updateActiveState('home');
 
-// 햄버거 메뉴
+// ============================================
+// 사이드바 토글 (데스크톱)
+// ============================================
+const sidebarToggle = document.getElementById('sidebarToggle');
+const topBar = document.getElementById('topBar');
+const sidebarEl = document.querySelector('.sidebar');
+const mainContent = document.querySelector('.main-content');
+let sidebarOpen = false;
+
+function toggleSidebar(open) {
+    sidebarOpen = (open !== undefined) ? open : !sidebarOpen;
+    if (sidebarOpen) {
+        sidebarEl.classList.add('open');
+        mainContent.classList.add('sidebar-open');
+        sidebarToggle.classList.add('active');
+    } else {
+        sidebarEl.classList.remove('open');
+        mainContent.classList.remove('sidebar-open');
+        sidebarToggle.classList.remove('active');
+    }
+    updateTopBarColor();
+}
+
+// 상단바 색상 — 홈 섹션이고 사이드바 닫혀있으면 흰색
+// targetSection 파라미터로 전환 '예정' 섹션을 전달 가능
+function updateTopBarColor(targetSection) {
+    var section = targetSection || currentSection;
+    if (section === 'home' && !sidebarOpen) {
+        topBar.classList.add('on-hero');
+    } else {
+        topBar.classList.remove('on-hero');
+    }
+}
+
+sidebarToggle.addEventListener('click', () => {
+    toggleSidebar();
+});
+
+// 초기 상태
+updateTopBarColor();
+
+// 햄버거 메뉴 (모바일)
 const hamburger = document.getElementById('hamburger');
 const mobileNav = document.getElementById('mobileNav');
 
@@ -170,15 +211,22 @@ document.querySelectorAll('.nav-link').forEach(link => {
         }
 
         switchSection(section);
+
+        // Home으로 갈 때만 사이드바 자동 닫기, 나머지는 열린 상태 유지
+        if (section === 'home') {
+            toggleSidebar(false);
+        }
+        updateTopBarColor(section);
     });
 });
 
-// 사이드바 로고 클릭
+// 상단 로고 클릭 → Home으로
 document.querySelectorAll('[data-section="home"]').forEach(el => {
-    if (el.closest('.sidebar-logo')) {
+    if (el.closest('.top-logo')) {
         el.addEventListener('click', (e) => {
             e.preventDefault();
             switchSection('home');
+            toggleSidebar(false);
         });
     }
 });
@@ -205,14 +253,67 @@ document.querySelectorAll('.sub-link').forEach(link => {
                 }
             }, 50);
         }
+
+        // Goods는 Home이 아니므로 사이드바 유지
+        updateTopBarColor('goods');
     });
 });
 
-// Inquiry 폼
-const inquiryForm = document.querySelector('.inquiry-form');
-if (inquiryForm) {
-    inquiryForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        alert('문의가 접수되었습니다. 빠른 시일 내에 연락드리겠습니다.');
+// Inquiry 폼 — inquiry.js에서 별도 처리
+
+// ============================================
+// Hero 슬라이드쇼
+// ============================================
+(function () {
+    const slides = document.querySelectorAll('.hero-slide');
+    const dots = document.querySelectorAll('.hero-dot');
+    if (slides.length < 2) return;
+
+    let current = 0;
+    let interval = null;
+    const DELAY = 6000; // 6초 간격
+
+    function goToSlide(index) {
+        slides[current].classList.remove('active');
+        dots[current].classList.remove('active');
+        current = index;
+        slides[current].classList.add('active');
+        dots[current].classList.add('active');
+    }
+
+    function nextSlide() {
+        goToSlide((current + 1) % slides.length);
+    }
+
+    function startAuto() {
+        stopAuto();
+        interval = setInterval(nextSlide, DELAY);
+    }
+
+    function stopAuto() {
+        if (interval) clearInterval(interval);
+    }
+
+    // 인디케이터 클릭
+    dots.forEach(dot => {
+        dot.addEventListener('click', () => {
+            const idx = parseInt(dot.dataset.slide);
+            if (idx !== current) {
+                goToSlide(idx);
+                startAuto(); // 클릭 후 타이머 리셋
+            }
+        });
     });
-}
+
+    // CTA 버튼 클릭 → Goods로 이동
+    const ctaBtn = document.querySelector('.hero-cta');
+    if (ctaBtn) {
+        ctaBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            switchSection('goods');
+        });
+    }
+
+    // 시작
+    startAuto();
+})();

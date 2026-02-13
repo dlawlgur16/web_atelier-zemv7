@@ -42,9 +42,18 @@
         </ul>
     </nav>
 
-    <!-- 좌측 사이드바 -->
+    <!-- 상단 고정 로고 + 햄버거 -->
+    <div class="top-bar" id="topBar">
+        <div class="top-logo"><a href="#home" data-section="home">ATELIER ZEM</a></div>
+        <button class="sidebar-toggle" id="sidebarToggle" aria-label="메뉴 열기/닫기">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+
+    <!-- 좌측 사이드바 (메뉴만) -->
     <aside class="sidebar">
-        <div class="sidebar-logo"><a href="#home" data-section="home">ATELIER ZEM</a></div>
         <nav>
             <ul class="sidebar-nav">
                 <li><a href="#home" class="nav-link" data-section="home">Home</a></li>
@@ -72,15 +81,27 @@
 
         <!-- Home -->
         <section id="home" class="active">
+            <!-- 배경 슬라이드쇼 -->
+            <div class="hero-slideshow">
+                <div class="hero-slide active" style="background-image: url('img/hero-1.png')"></div>
+                <div class="hero-slide" style="background-image: url('img/hero-2.png')"></div>
+            </div>
+            <div class="hero-overlay"></div>
+
+            <!-- 메인 콘텐츠 -->
             <div class="home-content">
                 <h1>ATELIER ZEM</h1>
                 <p class="subtitle">Premium Amenity &amp; Lifestyle Goods</p>
                 <div class="home-line"></div>
+                <a href="#goods" class="hero-cta" data-section="goods">Explore Collection</a>
             </div>
-            <div class="scroll-hint">
-                scroll
-                <span></span>
+
+            <!-- 슬라이드 인디케이터 -->
+            <div class="hero-indicators">
+                <button class="hero-dot active" data-slide="0"></button>
+                <button class="hero-dot" data-slide="1"></button>
             </div>
+
         </section>
 
         <!-- About -->
@@ -404,36 +425,49 @@
         <!-- Inquiry -->
         <section id="inquiry">
             <h2>Inquiry</h2>
+            <p class="inquiry-subtitle">빠른 상담을 원하시면 전화로 문의해 주세요.</p>
             <div class="inquiry-container">
-                <form class="inquiry-form">
+                <form class="inquiry-form" id="inquiryForm">
                     <div class="form-group">
-                        <label for="company">회사명</label>
-                        <input type="text" id="company" name="company" placeholder="회사명을 입력하세요">
+                        <label for="company">회사명 <span class="required">*</span></label>
+                        <input type="text" id="company" name="company" placeholder="회사명을 입력하세요" required>
                     </div>
                     <div class="form-group">
-                        <label for="name">담당자명</label>
-                        <input type="text" id="name" name="name" placeholder="담당자명을 입력하세요">
+                        <label for="name">담당자명 <span class="required">*</span></label>
+                        <input type="text" id="name" name="name" placeholder="담당자명을 입력하세요" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">이메일</label>
+                            <input type="email" id="email" name="email" placeholder="이메일을 입력하세요">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">연락처 <span class="required">*</span></label>
+                            <input type="tel" id="phone" name="phone" placeholder="010-0000-0000" required>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label for="email">이메일</label>
-                        <input type="email" id="email" name="email" placeholder="이메일을 입력하세요">
+                        <label for="message">문의 내용 <span class="required">*</span></label>
+                        <textarea id="message" name="message" placeholder="제품, 수량, 납기 등 문의 내용을 자유롭게 작성해 주세요." required></textarea>
                     </div>
-                    <div class="form-group">
-                        <label for="phone">연락처</label>
-                        <input type="tel" id="phone" name="phone" placeholder="연락처를 입력하세요">
+                    <div class="form-actions">
+                        <button type="submit" class="submit-btn" id="submitBtn">
+                            <span class="btn-text">문의하기</span>
+                            <span class="btn-loading" style="display:none;">전송 중...</span>
+                        </button>
                     </div>
-                    <div class="form-group">
-                        <label for="message">문의 내용</label>
-                        <textarea id="message" name="message" placeholder="문의 내용을 입력하세요"></textarea>
-                    </div>
-                    <button type="submit" class="submit-btn">문의하기</button>
+                    <div class="form-message" id="formMessage" style="display:none;"></div>
                 </form>
                 <div class="contact-info">
                     <h3>Contact</h3>
                     <p><strong>Tel.</strong> 02-1234-5678</p>
-                    <p><strong>Fax.</strong> 02-1234-5679</p>
                     <p><strong>Email.</strong> info@atelierzem.com</p>
                     <p><strong>Address.</strong><br>서울특별시 강남구 테헤란로 123<br>아뜰리에젬 빌딩 5층</p>
+                    <div class="contact-cta">
+                        <p class="cta-label">유선 문의</p>
+                        <a href="tel:021234-5678" class="cta-phone">02-1234-5678</a>
+                        <p class="cta-hours">평일 09:00 - 18:00</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -443,5 +477,6 @@
     <script src="js/common.js"></script>
     <script src="js/goods.js"></script>
     <script src="js/works.js"></script>
+    <script src="js/inquiry.js"></script>
 </body>
 </html>
