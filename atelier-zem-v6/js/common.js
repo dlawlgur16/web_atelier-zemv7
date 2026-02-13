@@ -25,6 +25,9 @@ function switchSection(targetId) {
             });
             var gg = document.getElementById('goodsGrid');
             if (gg) gg.style.display = '';
+            // 스크롤 잠금 해제
+            var gs = document.getElementById('goods');
+            if (gs) { gs.style.overflow = ''; gs.scrollTop = 0; }
         }, 600);
         return;
     }
@@ -264,6 +267,8 @@ document.querySelectorAll('.sub-link').forEach(link => {
                 pdv.classList.remove('visible');
                 setTimeout(function() {
                     pdv.classList.remove('show');
+                    // 스크롤 잠금 해제
+                    document.getElementById('goods').style.overflow = '';
                     // 현재 열린 카테고리 즉시 제거 (중간 노출 방지)
                     document.querySelectorAll('.goods-detail.show').forEach(function(d) {
                         d.classList.remove('visible', 'show');
