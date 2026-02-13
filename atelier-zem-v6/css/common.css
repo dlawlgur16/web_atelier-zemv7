@@ -600,6 +600,7 @@ section.active {
     justify-content: flex-start;
     align-items: center;
     overflow-y: auto;
+    position: relative;
 }
 
 #goods h2 {
@@ -881,6 +882,270 @@ section.active {
     margin-bottom: 2px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+}
+
+/* ── 제품 상세 뷰 (에디토리얼 감성) ── */
+.product-detail-view {
+    display: none;
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    background: #E8E4DF;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.product-detail-view.show {
+    display: block;
+}
+
+.product-detail-view.visible .product-detail-inner {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 브레드크럼 네비게이션 */
+.pd-breadcrumb {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 20px 28px;
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    transition-delay: 0.2s;
+}
+
+.product-detail-view.visible .pd-breadcrumb {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.pd-crumb {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    color: #888;
+    transition: color 0.2s ease;
+}
+
+.pd-crumb:hover {
+    color: #333;
+}
+
+.pd-crumb svg {
+    flex-shrink: 0;
+}
+
+.pd-crumb-current {
+    color: #444;
+    font-weight: 500;
+    pointer-events: none;
+}
+
+/* 내부 레이아웃 */
+.product-detail-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 100%;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* 왼쪽: 비주얼 */
+.product-detail-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px;
+    min-height: 100vh;
+}
+
+.product-detail-img-wrap {
+    position: relative;
+    width: 65%;
+    max-width: 400px;
+    z-index: 1;
+}
+
+.product-detail-img-wrap img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    transform: scale(0.92);
+    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.product-detail-view.visible .product-detail-img-wrap img {
+    transform: scale(1);
+    transition-delay: 0.15s;
+}
+
+/* 오른쪽: 텍스트 콘텐츠 */
+.product-detail-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 60px 80px 50px;
+    position: relative;
+}
+
+/* 메타 라인: 카테고리 · ATELIER ZEM */
+.product-detail-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.6s ease;
+    transition-delay: 0.2s;
+}
+
+.product-detail-view.visible .product-detail-meta {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.pd-category {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #888;
+}
+
+.pd-divider {
+    width: 20px;
+    height: 1px;
+    background: #ccc;
+}
+
+.pd-sub {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #aaa;
+}
+
+/* 제품명 */
+.pd-name {
+    font-family: 'Inter', 'Noto Sans KR', sans-serif;
+    font-size: clamp(28px, 3vw, 44px);
+    font-weight: 300;
+    letter-spacing: -0.5px;
+    line-height: 1.15;
+    color: #1a1a1a;
+    margin-bottom: 28px;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: all 0.6s ease;
+    transition-delay: 0.3s;
+}
+
+.product-detail-view.visible .pd-name {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 감성 스토리 텍스트 */
+.pd-story {
+    font-size: 14px;
+    line-height: 1.9;
+    color: #666;
+    letter-spacing: 0.2px;
+    max-width: 380px;
+    margin-bottom: 48px;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: all 0.6s ease;
+    transition-delay: 0.4s;
+}
+
+.product-detail-view.visible .pd-story {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 스펙 영역 */
+.pd-spec-area {
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    padding-top: 28px;
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: all 0.6s ease;
+    transition-delay: 0.5s;
+}
+
+.product-detail-view.visible .pd-spec-area {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.pd-spec-row {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.pd-spec-label {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: #aaa;
+}
+
+.pd-spec-text {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.7;
+}
+
+/* 문의 버튼 */
+.pd-inquiry-cta {
+    opacity: 0;
+    transform: translateY(15px);
+    transition: all 0.6s ease;
+    transition-delay: 0.6s;
+}
+
+.product-detail-view.visible .pd-inquiry-cta {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.pd-inquiry-btn {
+    display: inline-block;
+    padding: 14px 36px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #fff;
+    background: #333;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.pd-inquiry-btn:hover {
+    background: #1a1a1a;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
 }
 
 /* Works 섹션 */
@@ -1494,6 +1759,42 @@ section.active {
     .product-card-img {
         width: 55%;
         height: 55%;
+    }
+
+    /* 제품 상세 — 모바일 세로 스택 */
+    .product-detail-inner {
+        grid-template-columns: 1fr;
+    }
+
+    .product-detail-visual {
+        min-height: 50vh;
+        padding: 40px;
+    }
+
+    .product-detail-img-wrap {
+        width: 55%;
+    }
+
+    .product-detail-content {
+        padding: 40px 24px;
+    }
+
+    .pd-breadcrumb {
+        padding: 16px 20px;
+        gap: 4px;
+    }
+
+    .pd-crumb {
+        font-size: 11px;
+    }
+
+    .pd-name {
+        font-size: 26px;
+    }
+
+    .pd-story {
+        font-size: 13px;
+        margin-bottom: 32px;
     }
 }
 

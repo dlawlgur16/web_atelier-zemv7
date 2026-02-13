@@ -372,6 +372,58 @@
                     <div class="product-card"><div class="product-card-info"><p class="product-card-name">Mask Case</p><p class="product-card-desc">항균 PP 소재</p></div><div class="product-card-img"><img src="../pic_nobg/u3144176113_a_slim_foldable_mask_storage_case_in_matte_white__343d39f3-c4bd-4805-821c-5038748eeb97_3.png" alt=""></div><div class="product-card-bottom"><div class="bottom-col"><p class="bottom-title">Description</p><p>항균 PP 소재의 마스크 케이스.</p></div><div class="bottom-col"><p class="bottom-title">Features</p><p>항균 PP · 접이식 · 로고 인쇄 · 슬림형</p></div></div></div>
                 </div>
             </div>
+
+            <!-- 제품 상세 뷰 (감성 에디토리얼) -->
+            <div class="product-detail-view" id="productDetailView">
+                <!-- 브레드크럼 네비게이션 -->
+                <nav class="pd-breadcrumb" id="pdBreadcrumb">
+                    <a href="#" class="pd-crumb" id="pdCrumbCategory">
+                        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8L10 13" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        <span id="pdCrumbCategoryText"></span>
+                    </a>
+                    <a href="#" class="pd-crumb pd-crumb-current" id="pdCrumbProduct">
+                        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8L10 13" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        <span id="pdCrumbProductText"></span>
+                    </a>
+                </nav>
+
+                <div class="product-detail-inner">
+                    <!-- 왼쪽: 이미지 -->
+                    <div class="product-detail-visual">
+                        <div class="product-detail-img-wrap">
+                            <img id="pdImg" src="" alt="">
+                        </div>
+                    </div>
+
+                    <!-- 오른쪽: 텍스트 -->
+                    <div class="product-detail-content">
+                        <div class="product-detail-meta">
+                            <span class="pd-category" id="pdCategory"></span>
+                            <span class="pd-divider"></span>
+                            <span class="pd-sub">Atelier ZEM</span>
+                        </div>
+
+                        <h2 class="pd-name" id="pdName"></h2>
+                        <p class="pd-story" id="pdStory"></p>
+
+                        <div class="pd-spec-area">
+                            <div class="pd-spec-row">
+                                <span class="pd-spec-label">Description</span>
+                                <p class="pd-spec-text" id="pdDesc"></p>
+                            </div>
+                            <div class="pd-spec-row">
+                                <span class="pd-spec-label">Features</span>
+                                <p class="pd-spec-text" id="pdFeatures"></p>
+                            </div>
+                        </div>
+
+                        <div class="pd-inquiry-cta">
+                            <a href="#inquiry" class="pd-inquiry-btn" id="pdInquiryBtn">제작 문의하기</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </section>
 
         <!-- Works -->

@@ -11,12 +11,28 @@ function switchSection(targetId) {
     const target = document.getElementById(targetId);
     if (!current || !target) { isSwitching = false; return; }
 
-    // goods 떠날 때 상세뷰 닫기
-    if (currentSection === 'goods' && window.goodsCloseDetail) {
-        window.goodsCloseDetail();
+    // goods 떠날 때 — 상태 그대로 섹션 전환, 전환 후 정리
+    if (currentSection === 'goods') {
         updateSubLinkActive(null);
+        doSectionSwitch(current, target, targetId);
+
+        // 섹션이 완전히 사라진 후 내부 정리 (section-exit 0.25s + 여유)
+        setTimeout(function() {
+            var pdv = document.getElementById('productDetailView');
+            if (pdv) pdv.classList.remove('visible', 'show');
+            document.querySelectorAll('.goods-detail.show').forEach(function(d) {
+                d.classList.remove('visible', 'show');
+            });
+            var gg = document.getElementById('goodsGrid');
+            if (gg) gg.style.display = '';
+        }, 600);
+        return;
     }
 
+    doSectionSwitch(current, target, targetId);
+}
+
+function doSectionSwitch(current, target, targetId) {
     // active 상태 업데이트 (사이드바 반응)
     updateActiveState(targetId);
 
@@ -241,8 +257,34 @@ document.querySelectorAll('.sub-link').forEach(link => {
 
         updateSubLinkActive(cat);
 
-        if (currentSection === 'goods' && window.goodsSwitchDetail) {
-            window.goodsSwitchDetail(cat);
+        if (currentSection === 'goods') {
+            // 제품 상세 뷰가 열려있으면 페이드아웃 후 직접 전환 (중간 단계 없이)
+            var pdv = document.getElementById('productDetailView');
+            if (pdv && pdv.classList.contains('show')) {
+                pdv.classList.remove('visible');
+                setTimeout(function() {
+                    pdv.classList.remove('show');
+                    // 현재 열린 카테고리 즉시 제거 (중간 노출 방지)
+                    document.querySelectorAll('.goods-detail.show').forEach(function(d) {
+                        d.classList.remove('visible', 'show');
+                    });
+                    // 그리드는 숨긴 채로, 새 카테고리 직접 열기
+                    var gg = document.getElementById('goodsGrid');
+                    if (gg) gg.style.display = 'none';
+                    var targetDetail = document.querySelector('.goods-detail[data-detail="' + cat + '"]');
+                    if (targetDetail) {
+                        targetDetail.classList.add('show');
+                        document.getElementById('goods').scrollTop = 0;
+                        requestAnimationFrame(function() {
+                            requestAnimationFrame(function() {
+                                targetDetail.classList.add('visible');
+                            });
+                        });
+                    }
+                }, 500);
+                return;
+            }
+            if (window.goodsSwitchDetail) window.goodsSwitchDetail(cat);
         } else {
             // goods 섹션으로 전환 후 카테고리 열기
             switchSection('goods');
