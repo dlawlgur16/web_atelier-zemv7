@@ -358,6 +358,8 @@ document.querySelectorAll('.sub-link').forEach(link => {
         ctaBtn.addEventListener('click', (e) => {
             e.preventDefault();
             switchSection('goods');
+            toggleSidebar(true);
+            updateTopBarColor('goods');
         });
     }
 
