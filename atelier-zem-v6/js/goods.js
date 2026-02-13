@@ -149,9 +149,10 @@
             if (typeof switchSection === 'function') switchSection('inquiry');
         };
 
-        // 보여주기
-        productDetailView.classList.add('show');
+        // 보여주기 + 부모 스크롤 잠금
         goodsSection.scrollTop = 0;
+        goodsSection.style.overflow = 'hidden';
+        productDetailView.classList.add('show');
 
         requestAnimationFrame(function() {
             requestAnimationFrame(function() {
@@ -167,6 +168,7 @@
 
         setTimeout(function() {
             productDetailView.classList.remove('show');
+            goodsSection.style.overflow = '';
             goodsSection.scrollTop = 0;
         }, 400);
     }

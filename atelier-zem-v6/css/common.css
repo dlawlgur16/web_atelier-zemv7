@@ -603,6 +603,12 @@ section.active {
     position: relative;
 }
 
+/* 상세뷰 열려있을 때 아래 콘텐츠 숨김 */
+#goods:has(.product-detail-view.show) .goods-grid,
+#goods:has(.product-detail-view.show) .goods-detail {
+    visibility: hidden;
+}
+
 #goods h2 {
     display: none;
 }
@@ -891,12 +897,13 @@ section.active {
     inset: 0;
     z-index: 20;
     background: #E8E4DF;
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 .product-detail-view.show {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .product-detail-view.visible .product-detail-inner {
@@ -956,7 +963,8 @@ section.active {
 .product-detail-inner {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    min-height: 100vh;
+    width: 100%;
+    max-height: 100%;
     align-items: center;
     opacity: 0;
     transform: translateY(20px);
@@ -1174,20 +1182,13 @@ section.active {
 
 /* 제품 상세 — 낮은 화면 높이 (768px 이하) */
 @media (max-height: 768px) and (min-width: 769px) {
-    .product-detail-inner {
-        align-items: start;
-    }
-
     .product-detail-visual {
-        position: sticky;
-        top: 0;
-        height: 100vh;
-        padding: 40px;
+        padding: 30px;
     }
 
     .product-detail-content {
-        padding-top: clamp(40px, 6vh, 80px);
-        padding-bottom: 40px;
+        padding-top: 30px;
+        padding-bottom: 30px;
     }
 }
 
@@ -1805,9 +1806,13 @@ section.active {
     }
 
     /* 제품 상세 — 모바일 세로 스택 */
+    .product-detail-view.show {
+        align-items: flex-start;
+        overflow-y: auto;
+    }
+
     .product-detail-inner {
         grid-template-columns: 1fr;
-        min-height: auto;
         align-items: start;
     }
 
@@ -1867,6 +1872,45 @@ section.active {
     .product-card-img {
         width: 60%;
         height: 60%;
+    }
+
+    /* 제품 상세 — 소형폰 */
+    .product-detail-visual {
+        padding: 30px 20px 16px;
+    }
+
+    .product-detail-img-wrap {
+        width: 60%;
+        max-width: 240px;
+    }
+
+    .product-detail-content {
+        padding: 16px 20px 36px;
+    }
+
+    .pd-name {
+        font-size: 22px;
+        margin-bottom: 20px;
+    }
+
+    .pd-story {
+        font-size: 12px;
+        line-height: 1.8;
+        margin-bottom: 24px;
+    }
+
+    .pd-spec-area {
+        padding-top: 20px;
+        margin-bottom: 28px;
+    }
+
+    .pd-inquiry-btn {
+        padding: 12px 28px;
+        font-size: 11px;
+    }
+
+    .pd-breadcrumb {
+        padding: 12px 16px;
     }
 }
 

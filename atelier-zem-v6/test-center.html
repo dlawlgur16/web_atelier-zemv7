@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Center Test</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { height:100vh; overflow:hidden; font-family:sans-serif; background:#E8E4DF; }
+
+.goods-section {
+    height: 100vh;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+}
+
+.fake-content {
+    visibility: hidden;
+    height: 2000px;
+    flex-shrink: 0;
+}
+
+.product-detail-view {
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    background: #E8E4DF;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.breadcrumb {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    z-index: 30;
+    padding: 20px 28px;
+    color: #888;
+    font-size: 12px;
+}
+
+.product-detail-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    max-height: 100%;
+    align-items: center;
+}
+
+.visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px;
+}
+.visual .img-placeholder {
+    width: 320px;
+    height: 320px;
+    background: #d4cfc8;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-size: 14px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 60px 80px 50px;
+}
+.content .category { font-size: 11px; letter-spacing: 2px; color: #888; text-transform: uppercase; }
+.content h2 { font-size: 28px; font-weight: 300; margin: 16px 0 12px; letter-spacing: 1px; }
+.content .story { font-size: 13px; color: #666; line-height: 1.8; margin-bottom: 24px; }
+.content .spec { font-size: 12px; color: #777; margin-bottom: 8px; }
+</style>
+</head>
+<body>
+
+<div class="goods-section">
+    <div class="fake-content"></div>
+
+    <div class="product-detail-view">
+        <div class="breadcrumb">← Office → Hand Cream</div>
+        <div class="product-detail-inner">
+            <div class="visual">
+                <div class="img-placeholder">320x320 Image</div>
+            </div>
+            <div class="content">
+                <span class="category">Office · Atelier ZEM</span>
+                <h2>Hand Cream</h2>
+                <p class="story">지친 일상 속 작은 위로가 되는 핸드크림. 은은한 향이 오래도록 감싸며, 가볍지만 깊은 보습력이 하루를 지탱합니다.</p>
+                <p class="spec">Description: 시어버터 핸드크림 50ml</p>
+                <p class="spec">Features: 시어버터 · 50ml · 향 지속 · 브랜드 각인</p>
+                <div style="margin-top:24px;">
+                    <a href="#" style="padding:10px 24px; border:1px solid #666; color:#333; text-decoration:none; font-size:12px; letter-spacing:1px;">제작 문의하기</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var view = document.querySelector('.product-detail-view');
+    var inner = document.querySelector('.product-detail-inner');
+    var goods = document.querySelector('.goods-section');
+    console.log('viewport:', window.innerWidth, 'x', window.innerHeight);
+    console.log('goods:', goods.offsetWidth, 'x', goods.offsetHeight, 'scrollH:', goods.scrollHeight);
+    console.log('view:', view.offsetWidth, 'x', view.offsetHeight);
+    console.log('inner:', inner.offsetWidth, 'x', inner.offsetHeight, 'offsetTop:', inner.offsetTop);
+    console.log('view display:', getComputedStyle(view).display);
+    console.log('view alignItems:', getComputedStyle(view).alignItems);
+});
+</script>
+</body>
+</html>
