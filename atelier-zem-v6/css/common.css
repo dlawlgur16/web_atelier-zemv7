@@ -58,16 +58,16 @@ section.section-exit {
     left: 0;
     z-index: 1100;
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
-    padding: 28px 32px;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    padding: 22px 24px;
 }
 
 .top-logo {
-    font-size: 18px;
+    font-size: 13px;
     font-weight: 600;
-    letter-spacing: 3px;
+    letter-spacing: 2.5px;
     color: #333;
     transition: color 0.5s ease;
 }
@@ -88,8 +88,8 @@ section.section-exit {
 
 /* 햄버거 토글 버튼 */
 .sidebar-toggle {
-    width: 26px;
-    height: 18px;
+    width: 20px;
+    height: 14px;
     background: none;
     border: none;
     cursor: pointer;
@@ -103,8 +103,8 @@ section.section-exit {
 
 .sidebar-toggle span {
     display: block;
-    width: 22px;
-    height: 1.5px;
+    width: 18px;
+    height: 1.2px;
     background: #555;
     transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     transform-origin: left center;
@@ -113,7 +113,7 @@ section.section-exit {
 /* 열렸을 때 X 아이콘 */
 .sidebar-toggle.active span:nth-child(1) {
     transform: rotate(45deg);
-    width: 24px;
+    width: 19px;
 }
 
 .sidebar-toggle.active span:nth-child(2) {
@@ -123,7 +123,7 @@ section.section-exit {
 
 .sidebar-toggle.active span:nth-child(3) {
     transform: rotate(-45deg);
-    width: 24px;
+    width: 19px;
 }
 
 /* ── 좌측 사이드바 (메뉴 전용) ── */
@@ -134,7 +134,7 @@ section.section-exit {
     width: 200px;
     height: 100vh;
     background-color: #E8E4DF;
-    padding: 130px 0 60px;
+    padding: 80px 0 60px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -956,7 +956,8 @@ section.active {
 .product-detail-inner {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    min-height: 100%;
+    min-height: 100vh;
+    align-items: center;
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -967,8 +968,7 @@ section.active {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 60px;
-    min-height: 100vh;
+    padding: clamp(40px, 5vh, 60px);
 }
 
 .product-detail-img-wrap {
@@ -996,7 +996,7 @@ section.active {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 80px 60px 80px 50px;
+    padding: clamp(40px, 5vh, 80px) clamp(30px, 4vw, 60px) clamp(40px, 5vh, 80px) clamp(24px, 3vw, 50px);
     position: relative;
 }
 
@@ -1146,6 +1146,49 @@ section.active {
     background: #1a1a1a;
     transform: translateY(-1px);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* 제품 상세 — 작은 데스크탑 (노트북 등) */
+@media (max-width: 1200px) and (min-width: 769px) {
+    .product-detail-visual {
+        padding: clamp(30px, 4vh, 50px);
+    }
+
+    .product-detail-img-wrap {
+        width: 70%;
+        max-width: 340px;
+    }
+
+    .product-detail-content {
+        padding: clamp(30px, 4vh, 60px) clamp(20px, 3vw, 40px);
+    }
+
+    .pd-story {
+        margin-bottom: 32px;
+    }
+
+    .pd-spec-area {
+        margin-bottom: 28px;
+    }
+}
+
+/* 제품 상세 — 낮은 화면 높이 (768px 이하) */
+@media (max-height: 768px) and (min-width: 769px) {
+    .product-detail-inner {
+        align-items: start;
+    }
+
+    .product-detail-visual {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        padding: 40px;
+    }
+
+    .product-detail-content {
+        padding-top: clamp(40px, 6vh, 80px);
+        padding-bottom: 40px;
+    }
 }
 
 /* Works 섹션 */
@@ -1764,19 +1807,21 @@ section.active {
     /* 제품 상세 — 모바일 세로 스택 */
     .product-detail-inner {
         grid-template-columns: 1fr;
+        min-height: auto;
+        align-items: start;
     }
 
     .product-detail-visual {
-        min-height: 50vh;
-        padding: 40px;
+        padding: 40px 40px 20px;
     }
 
     .product-detail-img-wrap {
         width: 55%;
+        max-width: 280px;
     }
 
     .product-detail-content {
-        padding: 40px 24px;
+        padding: 20px 24px 40px;
     }
 
     .pd-breadcrumb {
