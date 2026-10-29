@@ -1712,7 +1712,9 @@ section.active {
         display: flex;
     }
 
-    .main-content {
+    /* 사이드바가 숨겨지므로 '열림' 상태여도 본문을 밀지 않는다 */
+    .main-content,
+    .main-content.sidebar-open {
         margin-left: 0;
         padding-top: 60px;
     }
